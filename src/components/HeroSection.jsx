@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { DotLottiePlayer } from '@dotlottie/react-player';
 
 const TypingLine = ({ text, delay = 0 }) => {
   const letters = text.split("");
@@ -18,7 +19,7 @@ const TypingLine = ({ text, delay = 0 }) => {
 
   return (
     <motion.pre
-      className="whitespace-pre-wrap font-thin text-[#4AF626] text-sm sm:text-base"
+      className="whitespace-pre-wrap font-thin text-[#4AF626] text-sm sm:text-base font-mono"
       variants={container}
       initial="hidden"
       animate="visible"
@@ -33,77 +34,87 @@ const TypingLine = ({ text, delay = 0 }) => {
 };
 
 const HeroSection = () => {
+  // Moving terminal output to variables keeps the JSX clean 
+  // and preserves the exact line breaks without needing <br /> tags.
+  const npmOutput = `> fancy-output@1.0.0 postinstall /private/tmp/fancy-output
+> node -e "console.log('\\n Successfully installed! You are ready to code, eat, and repeat!\\n')"`;
+
+  const pipOutput = `Collecting learn
+Downloading learn-0.1.0-py3-none-any.whl (2.5 kB)`;
+
   return (
-    <div id="home" className="h-auto min-h-[80vh] border-b-2 pt-36 pb-8">
-    
-      <div className="w-full bg-gray-700 px-4 py-2 flex gap-3 h-10 items-center rounded-t-md">
+    <div id="home" className="h-auto min-h-[80vh] border-b-2 border-gray-800 pt-10 pb-8">
+      
+      {/* Terminal Header */}
+      <div className="w-full bg-gray-800 px-4 py-2 flex gap-3 h-10 items-center rounded-t-lg shadow-md border border-gray-700">
         <div className="flex gap-2">
-          <section className="w-3 h-3 bg-green-500 rounded-full"></section>
-          <section className="w-3 h-3 bg-yellow-500 rounded-full"></section>
-          <section className="w-3 h-3 bg-red-500 rounded-full"></section>
+          {/* Fixed macOS dot order and changed to span for better semantics */}
+          <span className="w-3 h-3 bg-red-500 rounded-full shadow-sm"></span>
+          <span className="w-3 h-3 bg-yellow-500 rounded-full shadow-sm"></span>
+          <span className="w-3 h-3 bg-green-500 rounded-full shadow-sm"></span>
         </div>
-        <span className="text-sm">you@ssdc</span>
+        <span className="text-sm text-gray-300 font-mono tracking-wide">you@ssdc:~</span>
       </div>
 
-      
-      <div className="pt-6 flex flex-col lg:flex-row gap-8 lg:gap-12">
+      {/* Hero Content */}
+      <div className="pt-6 flex flex-col lg:flex-row gap-8 lg:gap-12 bg-black border-x border-b border-gray-800 rounded-b-lg p-6 shadow-xl">
         <div className="lg:w-1/2 flex flex-col gap-8">
         
-          <section className="order-2 lg:order-1">
+          {/* NPM Install Section */}
+          <section className="order-2 lg:order-1 font-mono">
             <TypingLine text="you@ssdc:~$ npm install code, eat, repeat" delay={0} />
             <motion.pre
-              className="whitespace-pre-wrap font-thin sm:text-sm tracking-tighter pl-2 text-[#60a5faef]"
+              className="whitespace-pre-wrap font-thin sm:text-sm tracking-tight pl-2 pt-2 text-[#60a5faef]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5, duration: 0.1 }}
             >
-              &lt; fancy-output@1.0.0 postinstall /private/tmp/fancy-output &gt;
-              node -e "console.log('\n\n🎉 Successfully installed! You are ready
-              to code, eat, and repeat!\n\n')" + fancy-output@1.0.0 added 1
-              package from 1 contributor and audited 1 package in 0.532s
+              {npmOutput}
             </motion.pre>
           </section>
 
-        
-          <section className="order-3 lg:order-2">
+          {/* PIP Install Section */}
+          <section className="order-3 lg:order-2 font-mono">
             <TypingLine text="you@ssdc:~$ pip install learn, grow" delay={2} />
             <motion.pre
-              className="whitespace-pre-wrap tracking-tighter sm:text-sm pl-2 text-[#60a5faef]"
+              className="whitespace-pre-wrap font-thin tracking-tight sm:text-sm pl-2 pt-2 text-[#60a5faef]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.3, duration: 0.1 }}
             >
-              Collecting learn <br /> Downloading learn-0.1.0-py3-none-any.whl (2.5 kB)
-              Collecting grow Downloading grow-0.1.0-py3-none-any.whl (2.5 kB)
-              Installing collected packages: learn, grow Successfully installed
-              learn-0.1.0 grow-0.1.0
+              {pipOutput}
             </motion.pre>
           </section>
 
-      
-          <section
-            className="ml-0 lg:ml-8 mt-12 text-center lg:text-left order-1 lg:order-3"
-          >
-            <h1 className="font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide">
+          {/* Welcome Text */}
+          <section className="ml-0 lg:ml-4 mt-8 text-center lg:text-left order-1 lg:order-3">
+            <h1 className="font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide text-white">
               SSDC Welcomes You
             </h1>
-
-            <p className="text-gray-300 tracking-tighter mt-8 leading-tight sm:text-base lg:text-lg max-w-md mx-auto lg:mx-0">
-              The only coding club in our college! Dedicated to Information
-              Technology. We are a group of passionate students who are
-              exploring the exciting world of coding and technology.
+            <p className="text-gray-400 tracking-normal mt-6 leading-relaxed sm:text-base lg:text-lg max-w-md mx-auto lg:mx-0">
+              The only coding club in our college! Dedicated to Information Technology. 
+              We are a group of passionate students who are exploring the exciting world of coding and technology.
             </p>
           </section>
         </div>
 
-        {/* GIF */}
-        <div className="lg:w-1/2 flex justify-center lg:justify-start">
+        {/* Hero Image/GIF */}
+        {/* <div className="lg:w-1/2 flex justify-center lg:justify-end items-center">
           <img
-            className="max-w-[200px] sm:max-w-[280px] md:max-w-[360px] lg:max-w-[454px] h-auto lg:ml-52"
+            className="max-w-[200px] sm:max-w-[280px] md:max-w-[360px] lg:max-w-[450px] h-auto object-contain hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
             src="/gif/landingGif.gif"
-            alt="Landing GIF"
+            alt="Animated illustration of a developer"
           />
-        </div>
+        </div> */}
+        <div className="lg:w-1/2 flex justify-center lg:justify-end items-center">
+      <DotLottiePlayer
+        src="/animations/hero.lottie"
+        autoplay
+        loop
+        className="brightness-85 drop-shadow-2xl"
+        style={{ height: '100%', width: '100%', maxWidth: '450px' }}
+      />
+    </div>
       </div>
     </div>
   );

@@ -1,54 +1,61 @@
 import React, { useState } from "react";
-import { Link as ScrollLink } from "react-scroll"; 
-import { Link as RouterLink } from "react-router-dom"; 
+import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation(); // Tells us which page we are on
 
-  const linkClass =
-    "cursor-pointer hover:text-yellow-400 transition-colors duration-200";
-  const activeClass = "text-yellow-400 border-b-2 border-yellow-400 pb-1";
+  // Check if we are on the Home page
+  const isHome = location.pathname === "/"; 
+
+ // Change hover:text-yellow-400 to hover:text-blue-400
+const linkClass = "cursor-pointer hover:text-blue-400 transition-colors duration-200";
+
+// Change text-yellow-400 and border-yellow-400 to blue-400
+const activeClass = "text-blue-400 border-b-2 border-blue-400 pb-1";
+
+  // The links to show ONLY on the Home page
+  const navSections = ["home", "about", "events", "gallery", "team", "contact"];
 
   return (
     <>
-      {/* Top Navbar */}
-      <div className="fixed top-0 left-0 w-full border-b-gray-500 border-2 bg-black z-50 px-10 py-3 flex justify-between items-center">
-        
-       
+      <nav className="fixed top-0 left-0 w-full border-b-gray-500 border-b-2 bg-black z-50 px-10 py-3 flex justify-between items-center">
         <div className="flex items-center gap-2 h-full">
           <RouterLink to="/">
             <img
-              src="images/logo.png"
-              alt="logo"
-              className="h-12 w-12 rounded-full object-cover cursor-pointer"
+              src="/images/logo.png"
+              alt="SSDC Logo"
+              className="h-12 w-12 rounded-full object-cover cursor-pointer hover:scale-105 transition"
             />
           </RouterLink>
         </div>
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-6 text-white items-center">
-          {["home", "about", "events", "gallery", "team", "contact"].map((section) => (
-            <ScrollLink
-              key={section}
-              to={section}
-              smooth={true}
-              duration={500}
-              offset={-80}
-              activeClass={activeClass}
-              className={linkClass}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </ScrollLink>
-          ))}
-
-          {/* Icons */}
-          <div className="bg-gray-700 p-4 rounded-full scale-75 ml-8 hover:bg-gray-600 cursor-pointer">
-            <img src="vector/search.png" alt="search" />
-          </div>
-          <div className="bg-gray-700 p-4 rounded-full scale-75 hover:bg-gray-600 cursor-pointer">
-            <img className="scale-125" src="vector/profile.png" alt="profile" />
-          </div>
+          {isHome ? (
+            // If on Home page, show scroll links
+            navSections.map((section) => (
+              <ScrollLink
+                key={section}
+                to={section}
+                smooth={true}
+                duration={500}
+                offset={-80}
+                activeClass={activeClass}
+                spy={true} // Highlights the link as you scroll past the section
+                className={linkClass}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </ScrollLink>
+            ))
+          ) : (
+            // If on Team page, just show a Home button
+            <RouterLink to="/" className={linkClass}>
+              &larr; Back to Home
+            </RouterLink>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -58,7 +65,7 @@ const Navbar = () => {
         >
           <Menu size={28} />
         </button>
-      </div>
+      </nav>
 
       {/* Mobile Sidebar */}
       <div
@@ -73,19 +80,29 @@ const Navbar = () => {
           </button>
         </div>
         <div className="flex flex-col gap-6 px-6 py-8 text-white">
-          {["home", "about", "events", "gallery", "team", "contact"].map((section) => (
-            <ScrollLink
-              key={section}
-              to={section}
-              smooth={true}
-              duration={500}
-              offset={-80}
+          {isHome ? (
+            navSections.map((section) => (
+              <ScrollLink
+                key={section}
+                to={section}
+                smooth={true}
+                duration={500}
+                offset={-80}
+                className={linkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </ScrollLink>
+            ))
+          ) : (
+            <RouterLink
+              to="/"
               className={linkClass}
               onClick={() => setIsOpen(false)}
             >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </ScrollLink>
-          ))}
+              &larr; Back to Home
+            </RouterLink>
+          )}
         </div>
       </div>
 

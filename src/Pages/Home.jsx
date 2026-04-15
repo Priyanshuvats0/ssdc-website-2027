@@ -1,16 +1,11 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import Landing from '../components/Landing'
-import Footer from '../components/Footer'
 
 function Home() {
-    
   return (
-   <div className='bg-black w-full h-[100vh]'>
-      <Navbar/>
+   // Removed h-[100vh] and bg-black (since App.jsx now handles the black background)
+   <div className='w-full'>
       <Landing/>
-      <Footer/>
-    
    </div>
   )
 }

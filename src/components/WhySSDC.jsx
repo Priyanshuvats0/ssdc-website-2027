@@ -1,33 +1,37 @@
+import React from "react";
+
+// 1. Moved the data array OUTSIDE the component so it doesn't re-render unnecessarily
+const moto = [
+  {
+    icon: "/vector/ThirdCard/learn.png", // Added forward slash
+    title: "Learn",
+    des: "Master modern technologies through hands-on projects and workshops",
+  },
+  {
+    icon: "/vector/ThirdCard/inovate.png", 
+    title: "Innovate",
+    des: "Build solutions that impact thousands of students",
+  },
+  {
+    icon: "/vector/ThirdCard/connect.png", 
+    title: "Connect",
+    des: "Join a vibrant community of passionate developers",
+  },
+  {
+    icon: "/vector/ThirdCard/grow.png", 
+    title: "Grow",
+    des: "Launch your tech career with industry exposure",
+  },
+];
+
 const WhySSDC = () => {
-  const moto = [
-    {
-      icon: "vector/ThirdCard/learn.png",
-      title: "Learn",
-      des: "Master modern technologies through hands-on projects and workshops",
-    },
-    {
-      icon: "vector/ThirdCard/inovate.png",
-      title: "Innovate",
-      des: "Build solutions that impact thousands of students",
-    },
-    {
-      icon: "vector/ThirdCard/connect.png",
-      title: "Connect",
-      des: "Join a vibrant community of passionate developers",
-    },
-    {
-      icon: "vector/ThirdCard/grow.png",
-      title: "Grow",
-      des: "Launch your tech career with industry exposure",
-    },
-  ];
   return (
-    <div className="w-full flex flex-col gap-10 justify-center mt-16 border-b-2 pb-18">
-      <h1 className="text-center font-bold tracking-wide py-2 text-4xl">
+    // Changed pb-18 to pb-20 and added border-gray-800
+    <div className="w-full flex flex-col gap-10 justify-center mt-16 border-b-2 border-gray-800 pb-20">
+      <h1 className="text-center text-white font-bold tracking-wide py-2 text-4xl">
         Why SSDC?
       </h1>
 
-  
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center">
         {moto.map((item, index) => (
           <WhyssdcCard
@@ -54,7 +58,7 @@ const WhyssdcCard = ({ icon, title, des }) => {
                     cursor-pointer group hover:scale-105">
       <img
         src={icon}
-        alt="icon"
+        alt={title} // Better accessibility
         className="size-[32px] transition-transform duration-300 group-hover:rotate-6"
       />
       <h1 className="text-lg font-semibold text-white">{title}</h1>
