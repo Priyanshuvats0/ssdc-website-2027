@@ -8,7 +8,7 @@ import TeamSection from "./TeamSection";
 
 const Landing = () => {
   return (
-    <div className="bg-black text-white px-6 sm:px-10 lg:px-16">
+    <div className="bg-transparent text-white px-6 sm:px-10 lg:px-16">
       <HeroSection />
       <DescriptionSection />
       <WhySSDC/>

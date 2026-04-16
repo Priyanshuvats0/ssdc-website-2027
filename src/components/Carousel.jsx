@@ -3,12 +3,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Carousel() {
   const images = [
-    "https://picsum.photos/id/1018/600/400",
-    "https://picsum.photos/id/1025/600/400",
-    "https://picsum.photos/id/1035/600/400",
-    "https://picsum.photos/id/1042/600/400",
-    "https://picsum.photos/id/1050/600/400",
-    "https://picsum.photos/id/1062/600/400",
+    "/images/corousel/image1.png",
+    "/images/corousel/image2.png",
+    "/images/corousel/image3.png",
+    "/images/corousel/image4.png",
+    "/images/corousel/image5.png",
   ];
 
   const containerRef = useRef(null);
@@ -22,7 +21,6 @@ export default function Carousel() {
   const total = images.length;
   const extendedImages = [...images, ...images];
 
-  
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
@@ -54,7 +52,6 @@ export default function Carousel() {
     return () => resizeObserver.disconnect();
   }, [itemsPerView]);
 
-  
   useEffect(() => {
     startTimer();
     return () => clearInterval(timerRef.current);
@@ -82,7 +79,6 @@ export default function Carousel() {
     resetTimer();
   };
 
-
   useEffect(() => {
     if (index >= total) {
       setTimeout(() => {
@@ -107,7 +103,7 @@ export default function Carousel() {
   const translateX = -(index * (slideWidth + gap));
 
   return (
-    <div id="gallery" className="w-full flex justify-center items-center border-b-2">
+    <div id="gallery" className="w-full flex justify-center items-center border-b-2 border-gray-600">
       <div className="relative w-full max-w-6xl mx-auto overflow-hidden mt-10 pb-12">
       
         <div
@@ -129,13 +125,12 @@ export default function Carousel() {
               <img
                 src={src}
                 className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-xl"
-                alt={`slide-${i}`}
+                alt={`carousel-slide-${i}`}
               />
             </div>
           ))}
         </div>
 
-    
         <button
           onClick={prevSlide}
           className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-blue-500 transition"
@@ -143,7 +138,6 @@ export default function Carousel() {
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-      
         <button
           onClick={nextSlide}
           className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-blue-500 transition"

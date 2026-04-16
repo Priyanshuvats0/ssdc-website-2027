@@ -5,23 +5,22 @@ import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation(); // Tells us which page we are on
+  const location = useLocation();
 
-  // Check if we are on the Home page
   const isHome = location.pathname === "/"; 
 
- // Change hover:text-yellow-400 to hover:text-blue-400
-const linkClass = "cursor-pointer hover:text-blue-400 transition-colors duration-200";
+  const linkClass = "cursor-pointer hover:text-blue-400 transition-colors duration-200";
+  const activeClass = "text-blue-400 border-b-2 border-blue-400 pb-1";
 
-// Change text-yellow-400 and border-yellow-400 to blue-400
-const activeClass = "text-blue-400 border-b-2 border-blue-400 pb-1";
-
-  // The links to show ONLY on the Home page
-  const navSections = ["home", "about", "events", "gallery", "team", "contact"];
+  // Removed "contact" from the array
+  const navSections = ["home", "about", "events", "gallery", "team"];
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full border-b-gray-500 border-b-2 bg-black z-50 px-10 py-3 flex justify-between items-center">
+      {/* Glassmorphism applied here! 
+        bg-black/50 gives it 50% transparency, backdrop-blur-md blurs what's behind it 
+      */}
+      <nav className="fixed top-0 left-0 w-full border-b border-white/10 bg-black/50 backdrop-blur-md z-50 px-10 py-3 flex justify-between items-center transition-all duration-300">
         <div className="flex items-center gap-2 h-full">
           <RouterLink to="/">
             <img
@@ -33,9 +32,8 @@ const activeClass = "text-blue-400 border-b-2 border-blue-400 pb-1";
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex gap-6 text-white items-center">
+        <div className="hidden md:flex gap-6 text-white items-center font-medium">
           {isHome ? (
-            // If on Home page, show scroll links
             navSections.map((section) => (
               <ScrollLink
                 key={section}
@@ -44,14 +42,13 @@ const activeClass = "text-blue-400 border-b-2 border-blue-400 pb-1";
                 duration={500}
                 offset={-80}
                 activeClass={activeClass}
-                spy={true} // Highlights the link as you scroll past the section
+                spy={true}
                 className={linkClass}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </ScrollLink>
             ))
           ) : (
-            // If on Team page, just show a Home button
             <RouterLink to="/" className={linkClass}>
               &larr; Back to Home
             </RouterLink>
@@ -60,26 +57,26 @@ const activeClass = "text-blue-400 border-b-2 border-blue-400 pb-1";
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-white hover:text-blue-400 transition"
           onClick={() => setIsOpen(true)}
         >
           <Menu size={28} />
         </button>
       </nav>
 
-      {/* Mobile Sidebar */}
+      {/* Mobile Sidebar - Also upgraded with a glass effect! */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-gray-900 shadow-lg transform transition-transform duration-300 z-50 ${
+        className={`fixed top-0 right-0 h-full w-64 bg-black/80 backdrop-blur-xl border-l border-white/10 shadow-2xl transform transition-transform duration-300 z-50 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-700">
-          <h2 className="text-lg font-bold text-white">SSDC SLIET</h2>
+        <div className="flex justify-between items-center px-6 py-5 border-b border-white/10">
+          <h2 className="text-lg font-bold text-white tracking-wider">SSDC</h2>
           <button onClick={() => setIsOpen(false)}>
-            <X size={28} className="text-white" />
+            <X size={28} className="text-white hover:text-blue-400 transition" />
           </button>
         </div>
-        <div className="flex flex-col gap-6 px-6 py-8 text-white">
+        <div className="flex flex-col gap-6 px-6 py-8 text-white font-medium">
           {isHome ? (
             navSections.map((section) => (
               <ScrollLink
@@ -109,7 +106,7 @@ const activeClass = "text-blue-400 border-b-2 border-blue-400 pb-1";
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity"
           onClick={() => setIsOpen(false)}
         ></div>
       )}

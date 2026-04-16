@@ -17,7 +17,7 @@ const DescriptionSection = () => {
   by CSE - 2017 undergrads. The team currently comprises of 40+ developers.`;
 
   return (
-    <div id="about" className="w-full flex flex-col md:flex-row items-center justify-between mt-16 border-b-2 border-gray-800 pb-16 gap-10">
+    <div id="about" className="w-full flex flex-col md:flex-row items-center justify-between mt-16 border-b-2 border-gray-600 pb-16 gap-10">
     
       <div className="w-fit mx-10">
         {/* Added the forward slash here */}

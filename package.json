@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@dotlottie/react-player": "^1.6.19",
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.81",
     "framer-motion": "^12.23.12",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.542.0",
