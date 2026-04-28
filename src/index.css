@@ -1,1 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800;900&family=Michroma&family=Oxanium:wght@700;800&family=Rajdhani:wght@700&display=swap');
+
 @import "tailwindcss";
+
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  
+  /* Our 3 new hard-edged options! */
+  --font-michroma: "Michroma", sans-serif; 
+  --font-oxanium: "Oxanium", display; 
+  --font-rajdhani: "Rajdhani", sans-serif; 
+}
+
+/* Hide scrollbars */
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
+}

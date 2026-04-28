@@ -2,7 +2,16 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // Add these two lines right here!
+        outfit: ['"Outfit"', 'sans-serif'],
+        inter: ['"Inter"', 'sans-serif'],
+        bangers: ['"Bangers"', 'cursive'],
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 };
