@@ -11,6 +11,7 @@ import WhySSDCV2 from "./WhySSDCV2";
 import EventsSectionV2 from "./Eventssectionv2 ";
 import CarouselV2 from "./CarouselV2";
 import TeamSectionV2 from "./TeamSectionV2";
+import HeroSectionV3 from "./HeroSectionV3";
 
 const LandingV2 = () => {
   return (
