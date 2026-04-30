@@ -6,6 +6,7 @@ import NavbarV2 from "./components/NavbarV2";
 import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import Team from "./Pages/Team";
+import FooterV2 from "./components/FooterV2";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer />
+      <FooterV2 />
     </div>
   );
 }
