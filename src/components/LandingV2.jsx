@@ -5,13 +5,13 @@ import WhySSDC from "./WhySSDC";
 import EventsSection from "./EventsSection";
 import Carousel from "./Carousel";
 import TeamSection from "./TeamSection";
-import HeroSectionV2 from "./HeroSectionV2";
+import HeroSectionV2 from "./HeroV2/HeroSectionV2";
 import DescriptionSectionV2 from "./DescriptionSectionV2";
-import WhySSDCV2 from "./WhySSDCV2";
-import EventsSectionV2 from "./Eventssectionv2 ";
-import CarouselV2 from "./CarouselV2";
-import TeamSectionV2 from "./TeamSectionV2";
-import HeroSectionV3 from "./HeroSectionV3";
+import HeroSectionV3 from "./HeroV3/HeroSectionV3";
+import WhySSDCV2 from "./WhySSDCV2/WhySSDCV2";
+import EventsSectionV2 from "./EventsV2/EventsSectionV2";
+import CarouselV2 from "./CarouselV2/CarouselV2";
+import TeamSectionV2 from "./TeamV2/TeamSectionV2";
 
 const LandingV2 = () => {
   return (
