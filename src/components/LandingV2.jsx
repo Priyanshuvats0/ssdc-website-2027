@@ -18,7 +18,7 @@ const LandingV2 = () => {
     // ⚠️  No px-* padding here — each section controls its own horizontal spacing.
     // Full-width backgrounds (hero grid, carousels, etc.) need to reach the viewport edge.
     <div className="bg-transparent text-white">
-      <HeroSectionV2 />
+      <HeroSectionV3/>
       <DescriptionSectionV2 />
       <WhySSDCV2 />
       <EventsSectionV2 />
