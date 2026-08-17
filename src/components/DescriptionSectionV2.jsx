@@ -95,19 +95,19 @@ const DescriptionSectionV2 = () => {
     <section
       id="about"
       ref={sectionRef}
-      style={{ background: "#03040a", color: "rgba(255,255,255,0.92)", position: "relative", overflow: "hidden", fontFamily: "'DM Sans', sans-serif" }}
+      style={{ background: "transparent", color: "rgba(255,255,255,0.92)", position: "relative", overflow: "hidden", fontFamily: "'DM Sans', sans-serif" }}
     >
       {/* Scanlines */}
       <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,210,255,0.013) 2px,rgba(0,210,255,0.013) 4px)" }} />
+
+      {/* Top Blend Overlay */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "150px", background: "linear-gradient(to bottom, #03040a 0%, transparent 100%)", zIndex: 1, pointerEvents: "none" }} />
 
       {/* Parallax blobs */}
       <motion.div style={{ y: blobTopYS, position: "absolute", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,210,255,0.08) 0%,transparent 70%)", top: -180, left: -200, pointerEvents: "none", zIndex: 0 }} />
       <motion.div style={{ y: blobBotYS, position: "absolute", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,119,255,0.055) 0%,transparent 70%)", bottom: -100, right: -150, pointerEvents: "none", zIndex: 0 }} />
 
       <div style={{ position: "relative", zIndex: 1, padding: "clamp(3rem,8vw,5.5rem) clamp(1.5rem,5vw,4rem)" }}>
-
-        {/* Top accent line */}
-        <div style={{ width: "100%", height: 1, background: "linear-gradient(90deg,transparent,rgba(0,210,255,0.55),rgba(255,255,255,0.12),rgba(0,210,255,0.55),transparent)", marginBottom: "3rem" }} />
 
         {/* Eyebrow */}
         <motion.p {...inViewProps(fadeLeft)}

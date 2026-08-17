@@ -47,7 +47,7 @@ const HeroSectionV3 = () => {
         if (n < 0.003) {
           if (nArr[i] > 0.001) {
             el.style.transform   = "";
-            el.style.borderColor = "rgba(255,255,255,0.022)";
+            el.style.borderColor = "rgba(255,255,255,0.015)";
             el.style.background  = "transparent";
           }
           return;
@@ -55,8 +55,8 @@ const HeroSectionV3 = () => {
         const dxN = (mx - cx) / RIPPLE;
         const dyN = (my - cy) / RIPPLE;
         el.style.transform   = `translateZ(${(n*120).toFixed(1)}px) rotateX(${(dyN*n*-40).toFixed(2)}deg) rotateY(${(dxN*n*40).toFixed(2)}deg)`;
-        el.style.borderColor = `rgba(${Math.round(n*40)},${Math.round(130+n*120)},${Math.round(210+n*45)},${(0.022+n*0.55).toFixed(3)})`;
-        el.style.background  = `rgba(0,200,255,${(n*0.045).toFixed(4)})`;
+        el.style.borderColor = `rgba(${Math.round(n*40)},${Math.round(130+n*120)},${Math.round(210+n*45)},${(0.015+n*0.25).toFixed(3)})`;
+        el.style.background  = `rgba(0,200,255,${(n*0.02).toFixed(4)})`;
       });
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -77,7 +77,7 @@ const HeroSectionV3 = () => {
     <div id="home" onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
       style={{
         position:"relative", width:"100%", minHeight:"100svh",
-        background:"#03040a", overflow:"hidden",
+        background:"transparent", overflow:"visible",
         display:"flex", flexDirection:"column",
         alignItems:"center", justifyContent:"center",
         perspective:"1200px",
@@ -107,8 +107,8 @@ const HeroSectionV3 = () => {
           {Array.from({ length: total }).map((_, i) => (
             <div key={i} ref={el => { cellsRef.current[i] = el; }}
               style={{
-                borderRight:".5px solid rgba(255,255,255,0.022)",
-                borderBottom:".5px solid rgba(255,255,255,0.022)",
+                borderRight:".5px solid rgba(255,255,255,0.015)",
+                borderBottom:".5px solid rgba(255,255,255,0.015)",
                 transformStyle:"preserve-3d", transformOrigin:"center center",
                 willChange:"transform, border-color, background",
               }}
@@ -120,7 +120,7 @@ const HeroSectionV3 = () => {
       {/* SPOTLIGHT */}
       <div ref={spotRef} style={{
         position:"absolute", width:1000, height:1000,
-        background:"radial-gradient(circle,rgba(0,170,255,.10) 0%,rgba(0,90,255,.04) 38%,transparent 62%)",
+        background:"radial-gradient(circle,rgba(0,170,255,.04) 0%,rgba(0,90,255,.015) 38%,transparent 62%)",
         pointerEvents:"none", zIndex:2, willChange:"transform",
       }} />
 
@@ -129,7 +129,9 @@ const HeroSectionV3 = () => {
 
       {/* VIGNETTE */}
       <div style={{ position:"absolute", inset:0, pointerEvents:"none", zIndex:3,
-        background:"radial-gradient(ellipse 88% 78% at 50% 50%,transparent 12%,#03040a 100%)" }} />
+        background:"radial-gradient(ellipse 88% 78% at 50% 50%,rgba(3,4,10,0) 12%,#03040a 100%)",
+        WebkitMaskImage:"linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+        maskImage:"linear-gradient(to bottom, black 0%, black 70%, transparent 100%)" }} />
 
       {/* BOTTOM GLOW */}
       <div style={{ position:"absolute", bottom:-100, left:"50%", transform:"translateX(-50%)",
