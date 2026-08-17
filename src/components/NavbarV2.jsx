@@ -82,21 +82,31 @@ const NavbarV2 = () => {
 
         {/* Desktop links */}
         <div className="nd" style={{ display:"flex", alignItems:"center", gap:"clamp(1.2rem,2.5vw,2.2rem)" }}>
-          {isHome ? SECTIONS.map(s => (
-            <ScrollLink
-              key={s} to={s} smooth duration={600} offset={-80}
-              spy onSetActive={() => setActive(s)}
-              className={`nl${active === s ? " active" : ""}`}
-              style={{ color: active === s ? "rgba(0,210,255,.92)" : "rgba(255,255,255,.45)" }}
+          <div style={{ display:"flex", alignItems:"center", gap:"clamp(1.2rem,2.5vw,2.2rem)" }}>
+            {isHome ? SECTIONS.map(s => (
+              <ScrollLink
+                key={s} to={s} smooth duration={600} offset={-80}
+                spy onSetActive={() => setActive(s)}
+                className={`nl${active === s ? " active" : ""}`}
+                style={{ color: active === s ? "rgba(0,210,255,.92)" : "rgba(255,255,255,.45)" }}
+              >
+                {s[0].toUpperCase() + s.slice(1)}
+              </ScrollLink>
+            )) : (
+              <RouterLink to="/" className="nl" style={{ color:"rgba(255,255,255,.45)", display:"flex", alignItems:"center", gap:5 }}>
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M8 1L3 6L8 11" stroke="rgba(0,210,255,.7)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                Home
+              </RouterLink>
+            )}
+
+            <RouterLink
+              to="/projects"
+              className="nl"
+              style={{ color: location.pathname === "/projects" ? "rgba(0,210,255,.92)" : "rgba(255,255,255,.45)" }}
             >
-              {s[0].toUpperCase() + s.slice(1)}
-            </ScrollLink>
-          )) : (
-            <RouterLink to="/" className="nl" style={{ color:"rgba(255,255,255,.45)", display:"flex", alignItems:"center", gap:5 }}>
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M8 1L3 6L8 11" stroke="rgba(0,210,255,.7)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              Home
+              Projects
             </RouterLink>
-          )}
+          </div>
 
           <a
             href="#"
@@ -169,12 +179,20 @@ const NavbarV2 = () => {
                     </ScrollLink>
                   </motion.div>
                 )) : (
-                  <RouterLink to="/" onClick={() => setMenuOpen(false)} style={{ textDecoration:"none" }}>
-                    <div style={{ display:"flex", alignItems:"center", gap:10, padding:"13px 0", cursor:"pointer" }}>
-                      <svg width="14" height="14" viewBox="0 0 12 12" fill="none"><path d="M8 1L3 6L8 11" stroke="rgba(0,210,255,.7)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                      <span style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"1.4rem", letterSpacing:"0.1em", color:"rgba(255,255,255,.75)" }}>Back to Home</span>
-                    </div>
-                  </RouterLink>
+                  <>
+                    <RouterLink to="/" onClick={() => setMenuOpen(false)} style={{ textDecoration:"none" }}>
+                      <div style={{ display:"flex", alignItems:"center", gap:10, padding:"13px 0", cursor:"pointer" }}>
+                        <svg width="14" height="14" viewBox="0 0 12 12" fill="none"><path d="M8 1L3 6L8 11" stroke="rgba(0,210,255,.7)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <span style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"1.4rem", letterSpacing:"0.1em", color:"rgba(255,255,255,.75)" }}>Back to Home</span>
+                      </div>
+                    </RouterLink>
+                    <RouterLink to="/projects" onClick={() => setMenuOpen(false)} style={{ textDecoration:"none" }}>
+                      <div style={{ display:"flex", alignItems:"center", gap:10, padding:"13px 0", cursor:"pointer", borderTop:".5px solid rgba(255,255,255,.05)" }}>
+                        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.56rem", color:"rgba(0,210,255,.5)", letterSpacing:"0.1em", minWidth:20 }}>PR</span>
+                        <span style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"1.4rem", letterSpacing:"0.1em", color:"rgba(255,255,255,.75)" }}>Projects</span>
+                      </div>
+                    </RouterLink>
+                  </>
                 )}
               </nav>
 

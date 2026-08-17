@@ -5,6 +5,77 @@ import LightningSystem from "./LightningSystem";
 const CELL   = 72;
 const RIPPLE = 340;
 
+const phrases = ["WE LEARN.", "WE BUILD.", "WE COMPETE."];
+
+const TypewriterLine = () => {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex];
+    const typingSpeed = isDeleting ? 55 : 130;
+    const delay = !isDeleting && displayedText === currentPhrase ? 1400 : typingSpeed;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && displayedText === currentPhrase) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isDeleting && displayedText === "") {
+        setIsDeleting(false);
+        setPhraseIndex((index) => (index + 1) % phrases.length);
+        return;
+      }
+
+      setDisplayedText((currentText) => {
+        if (isDeleting) {
+          return currentText.slice(0, -1);
+        }
+        return currentPhrase.slice(0, currentText.length + 1);
+      });
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, phraseIndex]);
+
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
+        minHeight: "1.1em",
+        fontFamily: "'Bebas Neue',sans-serif",
+        fontSize: "clamp(2.8rem,11vw,10.5rem)",
+        lineHeight: 0.88,
+        letterSpacing: "-0.01em",
+        background: "linear-gradient(175deg,rgba(255,255,255,.95),rgba(255,255,255,.38))",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+        userSelect: "none",
+        whiteSpace: "nowrap",
+      }}
+    >
+      <span>{displayedText}</span>
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+        style={{
+          display: "inline-block",
+          width: 4,
+          height: "0.85em",
+          marginBottom: "0.05em",
+          background: "rgba(255,255,255,0.85)",
+        }}
+      />
+    </div>
+  );
+};
+
 const HeroSectionV3 = () => {
   const spotRef  = useRef(null);
   const rafRef   = useRef(null);
@@ -184,21 +255,9 @@ const HeroSectionV3 = () => {
           SLIET Software Development Club
         </motion.p>
 
-        {/* WE BUILD */}
-        <motion.div initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.52, duration:.85, ease:[.16,1,.3,1] }}
-          style={{
-            fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(2.8rem,11vw,10.5rem)",
-            lineHeight:.88, letterSpacing:"-0.01em",
-            background:"linear-gradient(175deg,rgba(255,255,255,.95),rgba(255,255,255,.38))",
-            WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text",
-            userSelect:"none",
-          }}
-        >WE BUILD</motion.div>
-
         {/* SSDC */}
         <motion.div initial={{ opacity:0, y:18 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.7, duration:.85, ease:[.16,1,.3,1] }}
+          transition={{ delay:.52, duration:.85, ease:[.16,1,.3,1] }}
           style={{
             fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(3rem,13vw,13rem)",
             lineHeight:.95, letterSpacing:".05em", color:"#00d2ff",
@@ -207,9 +266,24 @@ const HeroSectionV3 = () => {
           }}
         >SSDC</motion.div>
 
+        {/* Typing slogan */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: .7, duration: .85, ease: [.16, 1, .3, 1] }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "clamp(-0.5rem, -1vw, -0.2rem)",
+            marginBottom: "clamp(1rem, 2.5vw, 1.8rem)",
+          }}
+        >
+          <TypewriterLine />
+        </motion.div>
+
         {/* Subheadline */}
         <motion.p initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.95, duration:.75 }}
+          transition={{ delay:1, duration:.75 }}
           style={{
             fontFamily:"'DM Sans',sans-serif", fontWeight:300,
             fontSize:"clamp(.84rem,1.6vw,1rem)", lineHeight:1.72,
@@ -224,7 +298,7 @@ const HeroSectionV3 = () => {
 
         {/* Divider */}
         <motion.div initial={{ scaleX:0, opacity:0 }} animate={{ scaleX:1, opacity:1 }}
-          transition={{ delay:1.15, duration:.85, ease:[.16,1,.3,1] }}
+          transition={{ delay:1.2, duration:.85, ease:[.16,1,.3,1] }}
           style={{
             width:"100%", maxWidth:400, height:".5px",
             margin:"clamp(1.6rem,3.5vw,2.6rem) auto",
@@ -234,7 +308,7 @@ const HeroSectionV3 = () => {
         />
 
         {/* Scroll hint */}
-        <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.9, duration:1 }}
+        <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.95, duration:1 }}
           style={{ marginTop:"clamp(2.8rem,6vw,4.5rem)", display:"flex", flexDirection:"column", alignItems:"center", gap:5 }}
         >
           <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:".52rem", letterSpacing:".28em", textTransform:"uppercase", color:"rgba(255,255,255,.13)" }}>scroll</span>

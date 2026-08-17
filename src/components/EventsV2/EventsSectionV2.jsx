@@ -3,66 +3,49 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import EventsHeader from "./EventsHeader";
 import EventCard from "./EventCard";
 import EventsBottomRow from "./EventsBottomRow";
+import { eventsCatalog } from "../../data/eventsCatalog";
 
-const events = [
-  {
-    id: 1,
-    index: "01 / 03",
-    title: "Athlos 03",
-    type: "Contest",
-    description:
-      "Ready to test your coding skills? Join the upcoming coding contest and put your problem solving abilities to the test. Compete with fellow students.",
-    date: "March 17, 2026",
-    time: "08:00 PM",
-    participation: "Individual",
-    prize: "₹10,000+ & Goodies",
-    image: "/images/events/athlos.png",
-    icon: (
+const eventIcon = (event) => {
+  if (event.type === "Contest") {
+    return (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <path d="M11 3L13.5 8.5L19.5 9.3L15 13.5L16.2 19.5L11 16.5L5.8 19.5L7 13.5L2.5 9.3L8.5 8.5L11 3Z"
-          stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+        <path
+          d="M11 3L13.5 8.5L19.5 9.3L15 13.5L16.2 19.5L11 16.5L5.8 19.5L7 13.5L2.5 9.3L8.5 8.5L11 3Z"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinejoin="round"
+        />
       </svg>
-    ),
-  },
-  {
-    id: 2,
-    index: "02 / 03",
-    title: "Intro to CP",
-    type: "Workshop",
-    description:
-      "Kickstart your CP journey. Learn time complexity, C++ STL, and basic data structures to start solving problems efficiently from day one.",
-    date: "February 20, 2026",
-    time: "05:00 PM",
-    participation: "Open to All",
-    prize: "Mentorship",
-    image: "/images/events/cp.png",
-    icon: (
+    );
+  }
+
+  if (event.index === "02 / 03") {
+    return (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <path d="M7 8L4 11L7 14M15 8L18 11L15 14M12 5L10 17"
-          stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path
+          d="M7 8L4 11L7 14M15 8L18 11L15 14M12 5L10 17"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
-    ),
-  },
-  {
-    id: 3,
-    index: "03 / 03",
-    title: "Advanced CP",
-    type: "Workshop",
-    description:
-      "Master advanced algorithms, dynamic programming, and graph theory to ace coding interviews and dominate competitive programming contests.",
-    date: "March 05, 2026",
-    time: "06:30 PM",
-    participation: "Intermediate",
-    prize: "Certificates",
-    image: "/images/events/workshop.png",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <path d="M3 17L8 12L12 15L19 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="19" cy="6" r="1.5" stroke="currentColor" strokeWidth="1.2"/>
-      </svg>
-    ),
-  },
-];
+    );
+  }
+
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path
+        d="M3 17L8 12L12 15L19 6"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="19" cy="6" r="1.5" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  );
+};
 
 const EventsSectionV2 = () => {
   const sectionRef = useRef(null);
@@ -118,8 +101,8 @@ const EventsSectionV2 = () => {
             gap: "clamp(1rem, 2vw, 1.5rem)",
           }}
         >
-          {events.map((event, i) => (
-            <EventCard key={event.id} event={event} i={i} />
+          {eventsCatalog.map((event, i) => (
+            <EventCard key={event.id} event={{ ...event, icon: eventIcon(event) }} i={i} />
           ))}
         </div>
 

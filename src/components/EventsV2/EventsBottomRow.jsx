@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 
 const EventsBottomRow = () => {
@@ -38,8 +39,8 @@ const EventsBottomRow = () => {
         </div>
       </div>
 
-      <a
-        href="#"
+      <Link
+        to="/events"
         style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: "0.68rem", letterSpacing: "0.18em", textTransform: "uppercase",
@@ -60,7 +61,7 @@ const EventsBottomRow = () => {
         }}
       >
         View all events →
-      </a>
+      </Link>
     </motion.div>
   );
 };

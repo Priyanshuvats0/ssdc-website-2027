@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { DotLottiePlayer } from '@dotlottie/react-player';
+import Lottie from "lottie-react";
+import codingAnimation from "../assets/animations/Coding.json";
 
 // --- NEW AUTHENTIC TERMINAL TYPING EFFECT ---
 const TypingLine = ({ text, delay = 0 }) => {
@@ -110,8 +111,8 @@ Downloading learn-0.1.0-py3-none-any.whl (2.5 kB)`;
 
         {/* Hero Image/Lottie */}
         <div className="lg:w-1/2 flex justify-center lg:justify-end items-center">
-          <DotLottiePlayer
-            src="/animations/hero.lottie"
+          <Lottie
+            animationData={codingAnimation}
             autoplay
             loop
             className="brightness-85 drop-shadow-2xl"

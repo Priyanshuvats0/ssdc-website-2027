@@ -1,15 +1,54 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import TeamSectionV2 from "../components/TeamV2/TeamSectionV2";
-import { teamTotals } from "../data/team";
+import EventCard from "../components/EventsV2/EventCard";
+import { eventsCatalog } from "../data/eventsCatalog";
 
-const statCards = [
-  { label: "Faculty advisors", value: teamTotals.faculty },
-  { label: "Mentors", value: teamTotals.mentors },
-  { label: "Core members", value: teamTotals.overall },
+const makeIcon = (event) => {
+  if (event.type === "Contest") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path
+          d="M11 3L13.5 8.5L19.5 9.3L15 13.5L16.2 19.5L11 16.5L5.8 19.5L7 13.5L2.5 9.3L8.5 8.5L11 3Z"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path
+        d="M3 17L8 12L12 15L19 6"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="19" cy="6" r="1.5" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  );
+};
+
+const groups = [
+  {
+    title: "Contests",
+    items: eventsCatalog.filter((event) => event.type === "Contest"),
+  },
+  {
+    title: "Workshops",
+    items: eventsCatalog.filter((event) => event.type === "Workshop"),
+  },
 ];
 
-export const Team = () => {
+const stats = [
+  { label: "Total events", value: eventsCatalog.length },
+  { label: "Contests", value: eventsCatalog.filter((event) => event.type === "Contest").length },
+  { label: "Workshops", value: eventsCatalog.filter((event) => event.type === "Workshop").length },
+];
+
+export const Events = () => {
   return (
     <div className="bg-[#03040a] text-white">
       <section
@@ -27,17 +66,17 @@ export const Team = () => {
             className="max-w-3xl"
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-2 text-[0.62rem] font-mono uppercase tracking-[0.28em] text-cyan-200/80">
-              SSDC / Team
+              SSDC / Events
             </div>
 
             <h1 className="mt-6 font-['Bebas_Neue'] text-5xl leading-none sm:text-7xl lg:text-8xl">
-              The people behind
-              <span className="block text-cyan-300">SSDC.</span>
+              All the events
+              <span className="block text-cyan-300">in one place.</span>
             </h1>
 
             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/55 sm:text-base">
-              Meet the faculty, mentors, and core people who guide the club, shape the culture,
-              and keep the build energy moving forward.
+              Browse the contests and workshops we’ve hosted. This page pulls from the same
+              event data used on the homepage, so it stays consistent as the club grows.
             </p>
           </motion.div>
 
@@ -47,7 +86,7 @@ export const Team = () => {
             transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="mt-10 grid gap-4 sm:grid-cols-3"
           >
-            {statCards.map((stat) => (
+            {stats.map((stat) => (
               <div
                 key={stat.label}
                 className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm"
@@ -64,10 +103,10 @@ export const Team = () => {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <a
-              href="#team"
+              href="#all-events"
               className="rounded-full bg-cyan-400 px-5 py-3 text-sm font-medium text-slate-950 transition hover:bg-cyan-300"
             >
-              View team
+              Explore events
             </a>
             <Link
               to="/"
@@ -79,28 +118,54 @@ export const Team = () => {
         </div>
       </section>
 
-      <TeamSectionV2 />
+      <section id="all-events" className="px-4 sm:px-6 lg:px-10 py-16">
+        <div className="mx-auto max-w-6xl space-y-14">
+          {groups.map((group) => (
+            <div key={group.title}>
+              <div className="mb-6 flex items-end justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                  <p className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-cyan-200/70">
+                    {group.title}
+                  </p>
+                  <h2 className="mt-2 font-['Bebas_Neue'] text-4xl sm:text-5xl">
+                    {group.items.length} {group.items.length === 1 ? "event" : "events"}
+                  </h2>
+                </div>
+                <div className="hidden sm:block font-mono text-[0.62rem] uppercase tracking-[0.28em] text-white/30">
+                  Latest club activity
+                </div>
+              </div>
 
-      <section className="px-4 sm:px-6 lg:px-10 py-14">
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {group.items.map((event) => (
+                  <EventCard key={event.id} event={{ ...event, icon: makeIcon(event) }} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-4 sm:px-6 lg:px-10 pb-16">
         <div className="mx-auto max-w-6xl rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-8 sm:px-10 sm:py-10">
           <p className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-cyan-200/70">
-            Want to join?
+            Want the next event?
           </p>
           <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <h2 className="font-['Bebas_Neue'] text-4xl sm:text-5xl">
-                Build with the team that builds SSDC.
+                We can keep this page updated as your event list grows.
               </h2>
               <p className="mt-3 text-sm leading-7 text-white/55 sm:text-base">
-                If you want this page to show more members, roles, or departments, we can extend
-                the team data file and render additional groups next.
+                If you want, I can also add a search bar, category filters, or a dedicated
+                details page for each event.
               </p>
             </div>
             <Link
-              to="/"
+              to="/team"
               className="inline-flex items-center justify-center rounded-full border border-cyan-400/25 bg-cyan-400/5 px-5 py-3 text-sm font-medium text-cyan-100 transition hover:bg-cyan-400/10"
             >
-              Explore homepage
+              Meet the team
             </Link>
           </div>
         </div>
@@ -109,4 +174,4 @@ export const Team = () => {
   );
 };
 
-export default Team;
+export default Events;

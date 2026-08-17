@@ -6,6 +6,8 @@ import NavbarV2 from "./components/NavbarV2";
 import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import Team from "./Pages/Team";
+import Events from "./Pages/Events";
+import Projects from "./Pages/Projects";
 import FooterV2 from "./components/FooterV2";
 import InteractivePet from "./components/InteractivePet";
 
@@ -23,6 +25,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/projects" element={<Projects />} />
         </Routes>
       </main>
 
