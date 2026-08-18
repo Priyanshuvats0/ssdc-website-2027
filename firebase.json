@@ -1,0 +1,9 @@
+{
+  "hosting": {
+    "target": "main",
+    "public": "dist",
+    "rewrites": [
+      { "source": "**", "destination": "/index.html" }
+    ]
+  }
+}

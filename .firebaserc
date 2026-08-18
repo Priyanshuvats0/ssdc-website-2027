@@ -1,0 +1,23 @@
+{
+  "projects": {
+    "default": "ssdc-26",
+    "ssdc": "ssdc-sliet-web"
+  },
+  "targets": {
+    "ssdc-26": {
+      "hosting": {
+        "main": [
+          "ssdcsliet"
+        ]
+      }
+    },
+    "ssdc-sliet-web": {
+      "hosting": {
+        "main": [
+          "ssdc"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

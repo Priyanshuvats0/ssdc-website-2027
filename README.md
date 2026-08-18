@@ -77,3 +77,7 @@ public/          Static assets like images, icons, animations, and sounds
 - The projects page is intentionally using placeholder data for now.
 - The team and events pages reuse shared data so they are easy to expand later.
 - If you add more real projects or events, update the files in `src/data/`.
+
+## Deployment Guide
+
+See [`DEPLOYMENT_GUIDE.md`](./DEPLOYMENT_GUIDE.md) for the step-by-step flow to redeploy this app to both Firebase projects.
