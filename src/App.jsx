@@ -10,6 +10,7 @@ import Events from "./Pages/Events";
 import Projects from "./Pages/Projects";
 import FooterV2 from "./components/FooterV2";
 import InteractivePet from "./components/InteractivePet";
+import HiveMindBanner from "./components/HiveMindBanner";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         </Routes>
       </main>
 
+      <HiveMindBanner />
       <InteractivePet />
       <FooterV2 />
     </div>

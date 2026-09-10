@@ -161,6 +161,41 @@ const EventCard = ({ event, i }) => {
             </div>
           ))}
         </div>
+
+        {event.link && (
+          <a
+            href={event.link}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              marginTop: "1.2rem",
+              width: "100%",
+              padding: "0.6rem",
+              background: hovered ? "#00d2ff" : "rgba(0, 210, 255, 0.1)",
+              border: "0.5px solid rgba(0, 210, 255, 0.3)",
+              borderRadius: "6px",
+              color: hovered ? "#000" : "#00d2ff",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.7rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px",
+              textDecoration: "none",
+              transition: "background 0.3s ease, color 0.3s ease",
+            }}
+          >
+            Visit Website 
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        )}
       </div>
     </motion.div>
   );

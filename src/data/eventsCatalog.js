@@ -1,7 +1,21 @@
 export const eventsCatalog = [
   {
     id: 1,
-    index: "01 / 03",
+    index: "01 / 04",
+    title: "HiveMind 2026",
+    type: "Contest",
+    description:
+      "A high-octane month-long digital challenge festival across 30 days testing UI design, AI prompting, cybersecurity, game theory, and competitive programming.",
+    date: "Sep 3 - Sep 26, 2026",
+    time: "Multiple Slots",
+    participation: "Open to All",
+    prize: "₹20,000 Total Pool",
+    image: "/images/events/hivemind-main.png",
+    link: "https://hivemind-ssdc.vercel.app/",
+  },
+  {
+    id: 2,
+    index: "02 / 04",
     title: "Athlos 03",
     type: "Contest",
     description:
@@ -13,21 +27,8 @@ export const eventsCatalog = [
     image: "/images/events/athlos.png",
   },
   {
-    id: 2,
-    index: "02 / 03",
-    title: "Intro to CP",
-    type: "Workshop",
-    description:
-      "Kickstart your CP journey. Learn time complexity, C++ STL, and basic data structures to start solving problems efficiently from day one.",
-    date: "February 20, 2026",
-    time: "05:00 PM",
-    participation: "Open to All",
-    prize: "Mentorship",
-    image: "/images/events/cp.png",
-  },
-  {
     id: 3,
-    index: "03 / 03",
+    index: "03 / 04",
     title: "Advanced CP",
     type: "Workshop",
     description:
@@ -38,4 +39,18 @@ export const eventsCatalog = [
     prize: "Certificates",
     image: "/images/events/workshop.png",
   },
+  {
+    id: 4,
+    index: "04 / 04",
+    title: "Intro to CP",
+    type: "Workshop",
+    description:
+      "Kickstart your CP journey. Learn time complexity, C++ STL, and basic data structures to start solving problems efficiently from day one.",
+    date: "February 20, 2026",
+    time: "05:00 PM",
+    participation: "Open to All",
+    prize: "Mentorship",
+    image: "/images/events/cp.png",
+  },
 ];
+
